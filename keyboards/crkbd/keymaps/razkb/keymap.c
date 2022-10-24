@@ -20,13 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
-#define L_BASE 0
-#define L_LOWER 1
-#define L_RAISE 2
-#define L_ADJUST 3
-#define L_GAMING 4
-#define L_RAGAMING 5
-#define L_FN 6
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
@@ -116,6 +110,14 @@ LT(6, KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                     
   )
 
 };
+
+#define L_BASE 0
+#define L_LOWER 2
+#define L_RAISE 4
+#define L_ADJUST 8
+#define L_GAMING 16
+#define L_RAGAMING 32
+#define L_FN 64
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {

@@ -20,6 +20,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
+enum custom_layers {
+    L_BASE,
+    L_LOWER,
+    L_RAISE,
+    L_ADJUST,
+    L_GAMING ,
+    L_RAGAMING ,
+    L_FN,
+};
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -31,7 +40,7 @@ LT(6, KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                 MT(MOD_LALT, KC_LGUI), MO(1), MT(MOD_LSFT, KC_SPC),     KC_ENT,   MO(2), MT(MOD_RALT, KC_DEL)
+                      KC_LALT, MO(1), MT(MOD_LSFT, KC_SPC),                      KC_ENT,   MO(2), MT(MOD_RALT, KC_DEL)
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -62,9 +71,9 @@ LT(6, KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                     
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_PMNS, KC_P7,   KC_P8,   KC_P9,   KC_PPLS,  KC_NUM,
+       RESET, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_PMNS, KC_P7,   KC_P8,   KC_P9,   KC_PPLS,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_VOLD, KC_VOLU,                      KC_PAST,   KC_P4,   KC_P5,   KC_P6, KC_PDOT, XXXXXXX,
+     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_VOLD, KC_VOLU,                      KC_PAST,   KC_P4,   KC_P5,   KC_P6, KC_PDOT,  KC_NUM,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, KC_MUTE,                      KC_PSLS,   KC_P1,   KC_P2,   KC_P3,   KC_P0, KC_PEQL,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -207,14 +216,14 @@ void render_bootmagic_status(bool status) {
     }
 }
 
-void oled_render_logo(void) {
-    static const char PROGMEM crkbd_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
-        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
-        0};
-    oled_write_P(crkbd_logo, false);
-}
+//void oled_render_logo(void) {
+//    static const char PROGMEM crkbd_logo[] = {
+//        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
+//        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
+//        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
+//        0};
+//    oled_write_P(crkbd_logo, false);
+//}
 
 void oled_render_razkb(void) {
     // 'razkb', 128x32px

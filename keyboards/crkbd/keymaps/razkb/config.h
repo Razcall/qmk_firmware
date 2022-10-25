@@ -28,8 +28,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 #define EE_HANDS
 
-//#define TAPPING_FORCE_HOLD
-//#define TAPPING_TERM 100
+#define TAPPING_FORCE_HOLD
+#define TAPPING_TERM 100
+#define IGNORE_MOD_TAP_INTERRUPT
+#define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped once again. */
+#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
+
 
 //#ifdef RGBLIGHT_ENABLE
 //    #define RGBLIGHT_EFFECT_BREATHING
@@ -67,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
-//#    define ENABLE_RGB_MATRIX_ALPHAS_MODS
+#    define ENABLE_RGB_MATRIX_ALPHAS_MODS
 //#    define ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
 //#    define ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
 #    define ENABLE_RGB_MATRIX_BREATHING
@@ -78,10 +82,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#    define ENABLE_RGB_MATRIX_BAND_SPIRAL_SAT
 //#    define ENABLE_RGB_MATRIX_BAND_SPIRAL_VAL
 //#    define ENABLE_RGB_MATRIX_CYCLE_ALL
-#    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
+//#    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
 //#    define ENABLE_RGB_MATRIX_CYCLE_UP_DOWN
 //#    define ENABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
-#    define ENABLE_RGB_MATRIX_CYCLE_OUT_IN
+//#    define ENABLE_RGB_MATRIX_CYCLE_OUT_IN
 //#    define ENABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
 //#    define ENABLE_RGB_MATRIX_CYCLE_PINWHEEL
 //#    define ENABLE_RGB_MATRIX_CYCLE_SPIRAL
@@ -98,7 +102,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#    define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
 // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
 #    define ENABLE_RGB_MATRIX_TYPING_HEATMAP
-//#    define ENABLE_RGB_MATRIX_DIGITAL_RAIN
+#    define ENABLE_RGB_MATRIX_DIGITAL_RAIN
 // enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 //#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 //#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE
@@ -114,10 +118,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#    define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
 
-#define TAPPING_TERM 300 
-#define IGNORE_MOD_TAP_INTERRUPT
-#define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped once again. */
-#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
+
 
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"

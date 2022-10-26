@@ -68,8 +68,6 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             for (uint8_t i = 0; i < 3; i++) {
                 rgb_matrix_set_color(mouse_leds2[i], RGB_YELLOW);
             }
-
             break;
-
     }
 }

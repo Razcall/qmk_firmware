@@ -30,6 +30,11 @@ enum custom_layers {
     L_FN,
 };
 
+#define LFT KC_LEFT 
+#define DWN KC_DOWN 
+#define UP KC_UP 
+#define RGT KC_RIGHT 
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
@@ -49,9 +54,9 @@ LT(6, KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                     
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
      _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     _______,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX,   TG(4),
+     _______,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                      KC_LEFT,  KC_DOWN,  KC_UP,  KC_RIGHT, XXXXXXX, TG(4),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     _______, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     _______,      LFT,    DWN,      UP,     RGT, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          _______, _______,  _______,   _______,   MO(3), _______
                                       //`--------------------------'  `--------------------------'
@@ -63,7 +68,7 @@ LT(6, KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, XXXXXXX, KC_PSCR, KC_HOME, KC_PGUP,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_NUBS, XXXXXXX, XXXXXXX,  KC_END, KC_PGDN,             KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
+      _______, KC_NUBS, XXXXXXX, XXXXXXX,  KC_END, KC_PGDN,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______,  MO(3),  _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -225,7 +230,7 @@ void render_bootmagic_status(bool status) {
 //    oled_write_P(crkbd_logo, false);
 //}
 
-void oled_render_razkb(void) {
+void oled_render_logo(void) {
     // 'razkb', 128x32px
     static const char PROGMEM razkb[] = {
         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -325,7 +330,7 @@ bool oled_task_user(void) {
         oled_render_keylog();
     } else {
         //oled_render_logo();
-        oled_render_razkb();
+        oled_render_logo();
     }
     return false;
 }

@@ -48,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     #define RGBLIGHT_EFFECT_TWINKLE
     #define RGBLIGHT_LIMIT_VAL 120
     #define RGBLIGHT_HUE_STEP 10
-    #define RGBLIGHT_SAT_STEP 17
+    #define RGBLIGHT_SAT_STEP 128
     #define RGBLIGHT_VAL_STEP 17
 #endif
 
@@ -119,7 +119,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_ALPHAS_MODS
-#    define RGB_MATRIX_STARTUP_HUE 10
+#    define RGB_MATRIX_STARTUP_HUE 64
 #    define RGB_MATRIX_STARTUP_SAT 128
 #    define RGB_MATRIX_STARTUP_VAL 128
 

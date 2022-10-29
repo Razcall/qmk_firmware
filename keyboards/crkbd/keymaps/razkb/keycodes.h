@@ -33,6 +33,7 @@ enum crkbd_layers {
 #define QUORCTL RCTL_T(KC_QUOT)
 #define RALTDEL MT(MOD_RALT,KC_DEL)
 #define MOSCLN LT(_MOUSE,KC_SCLN)
+#define MOSSLH LT(_MOUSE,KC_SLSH)
 #define ACCENTS LT(_ACCENTS,KC_RALT)
 #define FUN LT(_FUN,KC_SPC)
 #define FUNM MO(_FUN)
@@ -57,6 +58,10 @@ enum crkbd_layers {
 #if defined(TAP_DANCE_ENABLE)
     #include "tap_dances.h"
     #define KC_T_SFT T_SFT /* Single tap for Shift, Double tap for CAPS Lock */
+    #define T_X_CTL X_CTL /* quad type for X */
+    #define T_SP_FUN T_SPCFUN
 #else
     #define KC_T_SFT KC_LSFT
+    #define T_X_CTL KC_X
+    #define T_SP_FUN FUN
 #endif

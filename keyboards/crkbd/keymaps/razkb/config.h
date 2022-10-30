@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define TAPPING_FORCE_HOLD
 //#define TAPPING_TERM 100
 
-#define TAPPING_TERM 175
+#define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
 #define TAPPING_FORCE_HOLD
 
@@ -65,6 +65,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGB_MATRIX_SAT_STEP 8
 #    define RGB_MATRIX_VAL_STEP 8
 #    define RGB_MATRIX_SPD_STEP 10
+//#    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_ALPHAS_MODS
+//#    define RGB_MATRIX_STARTUP_HUE 64
+//#    define RGB_MATRIX_STARTUP_SAT 128
+//#    define RGB_MATRIX_STARTUP_VAL 128
 
 /* Enable the animations you want/need.  You may need to enable only a small number of these because       *
  * they take up a lot of space.  Enable and confirm that you can still successfully compile your firmware. */
@@ -118,10 +122,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #    define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
 
-#    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_ALPHAS_MODS
-#    define RGB_MATRIX_STARTUP_HUE 64
-#    define RGB_MATRIX_STARTUP_SAT 128
-#    define RGB_MATRIX_STARTUP_VAL 128
 
 #define OLED_FONT_H "keyboards/crkbd/keymaps/toinux/glcdfont.c"
 

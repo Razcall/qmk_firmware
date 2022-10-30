@@ -8,7 +8,7 @@
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
-    [TD_X_CTL]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL,x_finished, x_reset),
+//    [TD_X_CTL]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL,x_finished, x_reset),
     [TD_SPC_FUN]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL,spcl_finished, spcl_reset)
 };
 
@@ -43,7 +43,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  */
 int cur_dance (qk_tap_dance_state_t *state) {
   if (state->count == 1) {
-    if (state->interrupted || !state->pressed)  return SINGLE_TAP;
+ //   if (state->interrupted || !state->pressed)  return SINGLE_TAP;
+    if (!state->pressed)  return SINGLE_TAP;
     //key has not been interrupted, but they key is still held. Means you want to send a 'HOLD'.
     else return SINGLE_HOLD;
   }
@@ -61,89 +62,70 @@ int cur_dance (qk_tap_dance_state_t *state) {
   //If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
   //an exception here to return a 'TRIPLE_SINGLE_TAP', and define that enum just like 'DOUBLE_SINGLE_TAP'
   if (state->count == 3) {
-    if (state->interrupted || !state->pressed)  return TRIPLE_TAP;
+    if (state->interrupted || !state->pressed)  return TRIPLE_SINGLE_TAP;
     else return TRIPLE_HOLD;
   }
   else return 3; //magic number. At some point this method will expand to work for more presses
 }
 
 //instanalize an instance of 'tap' for the 'x' tap dance.
-static tap xtap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+//static tap xtap_state = {
+//  .is_press_action = true,
+//  .state = 0
+//};
 
-void x_finished (qk_tap_dance_state_t *state, void *user_data) {
-  xtap_state.state = cur_dance(state);
-  switch (xtap_state.state) {
-    case SINGLE_TAP: register_code(KC_X); break;
-    case SINGLE_HOLD: register_code(KC_LCTRL); break;
-    case DOUBLE_TAP: register_code(KC_ESC); break;
-    case DOUBLE_HOLD: register_code(KC_LALT); break;
-    case DOUBLE_SINGLE_TAP: register_code(KC_X); unregister_code(KC_X); register_code(KC_X);
-    //Last case is for fast typing. Assuming your key is `f`:
-    //For example, when typing the word `buffer`, and you want to make sure that you send `ff` and not `Esc`.
-    //In order to type `ff` when typing fast, the next character will have to be hit within the `TAPPING_TERM`, which by default is 200ms.
-  }
-}
-
-void x_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (xtap_state.state) {
-    case SINGLE_TAP: unregister_code(KC_X); break;
-    case SINGLE_HOLD: unregister_code(KC_LCTRL); break;
-    case DOUBLE_TAP: unregister_code(KC_ESC); break;
-    case DOUBLE_HOLD: unregister_code(KC_LALT);
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_X);
-  }
-  xtap_state.state = 0;
-}
+//void x_finished (qk_tap_dance_state_t *state, void *user_data) {
+//  xtap_state.state = cur_dance(state);
+//  switch (xtap_state.state) {
+//    case SINGLE_TAP: register_code(KC_X); break;
+//    case SINGLE_HOLD: register_code(KC_LCTRL); break;
+//    case DOUBLE_TAP: register_code(KC_ESC); break;
+//    case DOUBLE_HOLD: register_code(KC_LALT); break;
+//    case DOUBLE_SINGLE_TAP: register_code(KC_X); unregister_code(KC_X); register_code(KC_X);
+//    //Last case is for fast typing. Assuming your key is `f`:
+//    //For example, when typing the word `buffer`, and you want to make sure that you send `ff` and not `Esc`.
+//    //In order to type `ff` when typing fast, the next character will have to be hit within the `TAPPING_TERM`, which by default is 200ms.
+//  }
+//}
+//
+//void x_reset (qk_tap_dance_state_t *state, void *user_data) {
+//  switch (xtap_state.state) {
+//    case SINGLE_TAP: unregister_code(KC_X); break;
+//    case SINGLE_HOLD: unregister_code(KC_LCTRL); break;
+//    case DOUBLE_TAP: unregister_code(KC_ESC); break;
+//    case DOUBLE_HOLD: unregister_code(KC_LALT);
+//    case DOUBLE_SINGLE_TAP: unregister_code(KC_X);
+//  }
+//  xtap_state.state = 0;
+//}
 
 // create a global instance of the tapdance state type
-static tap td_state = {
+static tap sptap_state = {
   .is_press_action = true,
   .state = 0
 };
 
 
 void spcl_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state.state = cur_dance(state);
-  switch (td_state.state) {
-    case SINGLE_TAP:
-      register_code16(KC_SPC);
-      break;
-    case SINGLE_HOLD:
-      register_code(KC_LSFT); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    case DOUBLE_SINGLE_TAP: // allow nesting of 2 parens `((` within tapping term
-      tap_code16(KC_SPC);
-      register_code16(KC_SPC);
-      break;
-    case DOUBLE_HOLD: 
-      layer_on(_FUN);
-      break;
-    case TRIPLE_TAP: tap_code16(KC_SPC);tap_code16(KC_SPC); register_code(KC_SPC);
-      break;
-    case TRIPLE_HOLD: tap_code16(KC_SPC);tap_code16(KC_SPC); register_code(KC_SPC);
+  sptap_state.state = cur_dance(state);
+  switch (sptap_state.state) {
+    case SINGLE_TAP: register_code16(KC_SPC); break; 
+    case SINGLE_HOLD:register_code(KC_LSFT); break; // for a layer-tap key, use `layer_on(_MY_LAYER)` here
+    case DOUBLE_SINGLE_TAP:tap_code16(KC_SPC); register_code16(KC_SPC); break; // allow nesting of 2 parens `((` within tapping term
+    case DOUBLE_HOLD: layer_on(_FUN); break;
+    case TRIPLE_SINGLE_TAP: tap_code16(KC_SPC); tap_code16(KC_SPC); register_code(KC_SPC); break;
+    case TRIPLE_HOLD: tap_code16(KC_SPC); tap_code16(KC_SPC); register_code(KC_SPC);
   }
 }
 
 void spcl_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state.state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_SPC);
-      break;
-    case SINGLE_HOLD:
-      unregister_code(KC_LSFT); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    case DOUBLE_SINGLE_TAP:
-      unregister_code16(KC_SPC);
-      break;
-    case DOUBLE_HOLD: 
-      layer_off(_FUN);
-      break;
-    case TRIPLE_TAP: unregister_code(KC_SPC); 
-      break;
+  switch (sptap_state.state) {
+    case SINGLE_TAP: unregister_code16(KC_SPC); break;
+    case SINGLE_HOLD:unregister_code(KC_LSFT); break; // for a layer-tap key, use `layer_off(_MY_LAYER)` here
+    case DOUBLE_SINGLE_TAP:unregister_code16(KC_SPC); break;
+    case DOUBLE_HOLD: layer_off(_FUN); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_SPC); break;
     case TRIPLE_HOLD: unregister_code(KC_SPC);
   }
+  sptap_state.state = 0;
 }
-

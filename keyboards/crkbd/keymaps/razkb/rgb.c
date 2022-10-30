@@ -18,13 +18,19 @@
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
-static const char gaming_leds[] = {18, 22, 19, 16};
+static const char gaming_leds[] = {18, 19, 22, 16};
+static const char gamingarround_leds[] = {10, 11, 12, 17, 23};
+static const char gamingextra_leds[] = {6, 14, 15, 20, 21,25, 26};
 static const char gaming2_leds[] = {23, 18, 17, 10, 9, 22, 19, 16, 11, 8};
 static const char nav_leds1[] = {35, 38, 43, 46};
 static const char nav_leds2[] = {34, 36, 37, 39, 44, 50};
+static const char nav_noled[] = {42, 45, 47, 48, 49};
 static const char fun_leds[] = {45, 44, 37, 46, 43, 38, 47, 42, 39, 40};
+static const char fun_leds2[] = {41, 48, 49, 52, 53};
+static const char fn_leds[] = {10, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23};
 static const char mouse_leds1[] = {11, 16, 17, 19};
 static const char mouse_leds2[] = {38, 43, 46};
+
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
@@ -36,6 +42,12 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 for (uint8_t i = 0; i < 4; i++) {
                     rgb_matrix_set_color(gaming_leds[i], RGB_RED);
                 }
+                for (uint8_t i = 0; i < 5; i++) {
+                    rgb_matrix_set_color(gamingarround_leds[i], RGB_GOLD);
+                }
+                for (uint8_t i = 0; i < 7 ; i++) {
+                    rgb_matrix_set_color(gamingextra_leds[i], RGB_GOLDENROD);
+                }
             }
             break;
         case _GAMING2:
@@ -46,20 +58,34 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
             break;
         case _NAV:
+            for (uint8_t i = 0; i < 12; i++) {
+                rgb_matrix_set_color(fn_leds[i], RGB_ORANGE);
+            }
             for (uint8_t i = 0; i < 4; i++) {
                 rgb_matrix_set_color(nav_leds1[i], RGB_TEAL);
             }
             for (uint8_t i = 0; i < 6; i++) {
                 rgb_matrix_set_color(nav_leds2[i], RGB_YELLOW);
             }
+            for (uint8_t i = 0; i < 5
+                ; i++) {
+                rgb_matrix_set_color(nav_noled[i], RGB_BLACK);
+            }
             break;
         case _FUN:
+            for (uint8_t i = 0; i < 12; i++) {
+                rgb_matrix_set_color(fn_leds[i], RGB_ORANGE);
+            }
             for (uint8_t i = 0; i < 10; i++) {
                 rgb_matrix_set_color(fun_leds[i], RGB_GREEN);
             }
+            for (uint8_t i = 0; i < 5; i++) {
+                rgb_matrix_set_color(fun_leds2[i], RGB_GOLD);
+            }
+            rgb_matrix_set_color(33, RGB_RED);
             break;
         case _ADJUST:
-                rgb_matrix_set_color(6, RGB_RED);
+                rgb_matrix_set_color(6, RGB_RED);  
             break;
         case _MOUSE:
             for (uint8_t i = 0; i < 4; i++) {
@@ -71,3 +97,4 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
     }
 }
+

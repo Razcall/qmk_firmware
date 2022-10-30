@@ -58,10 +58,10 @@ enum crkbd_layers {
 #if defined(TAP_DANCE_ENABLE)
     #include "tap_dances.h"
     #define KC_T_SFT T_SFT /* Single tap for Shift, Double tap for CAPS Lock */
-    #define T_X_CTL X_CTL /* quad type for X */
+//    #define T_X_CTL X_CTL /* quad type for X */
     #define T_SP_FUN T_SPCFUN
 #else
     #define KC_T_SFT KC_LSFT
-    #define T_X_CTL KC_X
+//    #define T_X_CTL KC_X
     #define T_SP_FUN FUN
 #endif

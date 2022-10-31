@@ -65,3 +65,8 @@ enum crkbd_layers {
 //    #define T_X_CTL KC_X
     #define T_SP_FUN FUN
 #endif
+
+/* tap term  keycodes */
+//#if defined(TAPPING_TERM_PER_KEY)
+//    #include "tapterm.c"
+//#endif

@@ -25,6 +25,6 @@
     ],
     "layout": "LAYOUT_all",
     "layers": [
-        ["MACRO_0", "MACRO_1", "MACRO_2", "MACRO_3"]
+        ["MACRO_0", "MACRO_1", "MACRO_2", "MACRO_3", "MACRO_4"]
     ]
 }

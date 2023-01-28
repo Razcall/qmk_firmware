@@ -61,34 +61,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  ,-----------------------------------------------------.                    ,-----------------------------------------------------.
 //  | Tab    |   Q    |   W    |   E    |   R    |   T    |                    |   Y    |   U    |   I    |   O    |   P    | Bksp   |
 //  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  | CtrlSc   |   A    |   S    |   D    |   F    |   G    |                    |   H    |   J    |   K    |   L    | ;/Mous |   '    |
+//  | CtrlSc   |   A    |   S    |   D    |   F    |   G    |                    |   H    |   J    |   K    |   L  |   ;    |   '    |
 //  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  | Shift  |   Z    |   X    |   C    |   V    |   B    |                    |   N    |   M    |   ,    |   .    |   /    | SftEnT |
+//  | Shift  |   Z    |   X    |   C    |   V    |   B    |                    |   N    |   M    |   ,    |   .    |   /    |  ESC   |
 //  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
-//                                      |  LALT  |GAMING2 | Space  |  | Spc/NAV| RAISE  |ACCENTS |
+//                                      |  LALT  |GAMING2 | Space  |  | Enter  | RAISE  |ACCENTS |
 //                                      `--------------------------'  `--------------------------'
   [_GAMING] = LAYOUT_split_3x6_3(
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
        CTRLSC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
-        T_SFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,  MOSSLH,  SFTESC,
-                                          KC_LALT, GAMING2,  KC_SPC,     ENTNAV,   RAISE, ACCENTS
+        T_SFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,  MOSSLH,  KC_ESC,
+                                          KC_LALT, GAMING2,  KC_SPC,     KC_ENT,   RAISE, ACCENTS
 
   ),
 
 // Gaming 2
 //  ,-----------------------------------------------------.                    ,-----------------------------------------------------.
-//  |  Tab   |   1    |   2    |   3    |   4    |   5    |                    |        |        |        |        |        |        |
+//  |  Tab   |   1    |   2    |   3    |   4    |   5    |                    |   F1   |   F2   |   F2   |   F4   |        |        |
 //  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  |  Ctrl  |   6    |   7    |   8    |   9    |   0    |                    |        |        |        |        |        |        |
-//  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  |  LGui  | Base   |        |  Vol-  |  Vol+  |  Mute  |                    |        |        |        |        |        |        |
+//  |  Ctrl  |   6    |   7    |   8    |   9    |   0    |                    |   F5   |   F6   |   F7   |   F8   |        |        |
+//  |--------+--------+--------+--------+--------+--------|                    +--------+--------+--------+--------+--------+--------|
+//  |  LGui  | Base   |        |  Vol-  |  Vol+  |  Mute  |                    |   F9   |   F10  |   F11  |   F12  |        |        |
 //  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
 //                                      |        |        |        |  |        |        |        |
 //                                      `--------------------------'  `--------------------------'
   [_GAMING2] = LAYOUT_split_3x6_3(
-       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      KC_LCTL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      KC_LGUI,    BASE, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_F1,    KC_F2,  KC_F3,   KC_F4, XXXXXXX, XXXXXXX,
+      KC_LCTL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                        KC_F5,    KC_F6,  KC_F7,   KC_F8, XXXXXXX, XXXXXXX,
+      KC_LGUI,    BASE, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,                        KC_F9,   KC_F10, KC_F11,  KC_F12, XXXXXXX, XXXXXXX,
                                           _______, _______, _______,    _______, _______, _______
 
   ),

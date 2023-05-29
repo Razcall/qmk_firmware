@@ -47,13 +47,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 //  | Shift  |   Z    |   X    |   C    |   V    |   B    |                    |   N    |   M    |   ,    |   .    | //Mous | SftEsc |
 //  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
-//                                      |  LALT  | LOWER  |Spc/FUN |  | Spc/NAV| RAISE  |ACCENTS |
+//                                      |  LALT  |LOW/FUN |Spc/FUN |  | Spc/NAV| RAISE  |ACCENTS |
 //                                      `--------------------------'  `--------------------------'
   [_BASE] = LAYOUT_split_3x6_3(
       TABLGUI,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
       KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, QUORCTL,
      KC_T_SFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,  MOSSLH,  SFTESC,
-                                          KC_LALT,   LOWER, T_SP_FUN,     ENTNAV,  RAISE, RALTDEL
+                                          KC_LALT,   T_LOW_FUN, SFTSPC,     ENTNAV,  RAISE, RALTDEL
 
   ),
 
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LOWER] = LAYOUT_split_3x6_3(
        KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
       _______, XXXXXXX, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,                      XXXXXXX, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
-      _______, GAMING,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+      _______,  GAMING,  KC_ENT, KC_VOLD, KC_VOLU, KC_MUTE,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                                           _______, _______, _______,   _______,  _______, _______
 
   ),
@@ -140,9 +140,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                      |        |        |        |  |        |        |        |
 //                                      `--------------------------'  `--------------------------'
   [_RAISE] = LAYOUT_split_3x6_3(
-      KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-      _______,   SC_F1,   SC_F2,   SC_F3,   SC_F4, XXXXXXX,                      XXXXXXX, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-      _______, KC_NUBS, LSFT(KC_NUBS), KC_VOLD, KC_VOLU, KC_MUTE,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+      KC_TILD, KC_EXLM,         KC_AT, KC_HASH,  KC_DLR, KC_PERC,                KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
+      _______,   SC_F1,         SC_F2,   SC_F3,   SC_F4, XXXXXXX,                XXXXXXX, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
+      _______, KC_NUBS, LSFT(KC_NUBS), XXXXXXX, XXXXXXX, KC_MUTE,                KC_VOLD, KC_VOLU, KC_MUTE, XXXXXXX, XXXXXXX, _______,
                                           _______, _______, _______,   _______,  _______, _______
 
   ),
@@ -245,6 +245,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case T_SP_FUN:
+            return TAPPING_TERM + 100;
+        case T_LOW_FUN:
+            return TAPPING_TERM + 100;
+        case KC_T_SFT:
             return TAPPING_TERM + 100;
         default:
             return TAPPING_TERM;

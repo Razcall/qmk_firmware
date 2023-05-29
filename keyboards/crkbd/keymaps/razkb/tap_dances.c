@@ -6,11 +6,7 @@
 #include "keycodes.h"
 
 
-qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
-//    [TD_X_CTL]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL,x_finished, x_reset),
-    [TD_SPC_FUN]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL,spcl_finished, spcl_reset)
-};
+
 
 //quad function tap dance
 
@@ -105,6 +101,22 @@ static tap sptap_state = {
   .state = 0
 };
 
+// Pour TD_LSFT_CAPS (T_SFT)
+void lsft_finished(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        register_code(KC_LSFT);
+    } else if (state->count == 2) {
+        register_code(KC_CAPS);
+    }
+}
+
+void lsft_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_LSFT);
+    } else if (state->count == 2) {
+        unregister_code(KC_CAPS);
+    }
+}
 
 void spcl_finished (qk_tap_dance_state_t *state, void *user_data) {
   sptap_state.state = cur_dance(state);
@@ -129,3 +141,44 @@ void spcl_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   sptap_state.state = 0;
 }
+
+// Pour TD_LOW_FUN (T_LOWFUN)
+void low_fun_finished (qk_tap_dance_state_t *state, void *user_data) {
+    // créez une instance de l'état de tap dance
+    tap lowtap_state = {
+        .is_press_action = true,
+        .state = 0
+    };
+
+    // déterminez l'état actuel
+    lowtap_state.state = cur_dance(state);
+
+    // agissez en fonction de l'état
+    switch (lowtap_state.state) {
+        case SINGLE_TAP: 
+        case SINGLE_HOLD: 
+            layer_on(_LOWER); 
+            break;
+        case DOUBLE_TAP: 
+        case DOUBLE_HOLD: 
+            layer_on(_FUN); 
+            break;
+        // ajoutez des cas pour plus de taps si nécessaire
+    }
+}
+
+void low_fun_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        layer_off(_LOWER);
+    } else if (state->count == 2) {
+        layer_off(_FUN);
+    }
+}
+
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_LSFT_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lsft_finished, lsft_reset),
+//    [TD_X_CTL]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL,x_finished, x_reset),
+    [TD_SPC_FUN]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL,spcl_finished, spcl_reset),
+    [TD_LOW_FUN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, low_fun_finished, low_fun_reset),
+};
